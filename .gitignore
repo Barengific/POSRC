@@ -27,10 +27,14 @@ x86/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
 bld/
+build/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
+
+# Roslyn cache directories
+*.ide/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
@@ -88,6 +92,7 @@ StyleCopReport.xml
 *.tlh
 *.tmp
 *.tmp_proj
+*.tmp_proj
 *_wpftmp.csproj
 *.log
 *.tlog
@@ -97,6 +102,7 @@ StyleCopReport.xml
 *.pidb
 *.svclog
 *.scc
+*_i.h
 
 # Chutzpah Test files
 _Chutzpah*
@@ -131,6 +137,9 @@ $tf/
 _ReSharper*/
 *.[Rr]e[Ss]harper
 *.DotSettings.user
+
+# JustCode is a .NET coding addin-in
+.JustCode
 
 # TeamCity is a build add-in
 _TeamCity*
@@ -178,6 +187,8 @@ DocProject/Help/html
 
 # Click-Once directory
 publish/
+
+!packages/build/
 
 # Publish Web Output
 *.[Pp]ublish.xml
