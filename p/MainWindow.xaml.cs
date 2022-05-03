@@ -52,7 +52,49 @@ namespace p
                 //command.ExecuteNonQuery();
                 //command.Parameters.AddWithValue("$id", 0);
 
-                command.CommandText = @"SELECT * FROM staff";
+                //command.CommandText = @"SELECT * FROM staff";
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        //var id = reader.GetString(0);
+                        //Debug.WriteLine($"Hello, {id}!");
+                        //var upass = reader.GetString(1);
+                        //Debug.WriteLine($"Hello, {upass}!");
+                        //var fname = reader.GetString(2);
+                        //Debug.WriteLine($"Hello, {fname}!");
+                        //var lname = reader.GetString(3);
+                        //Debug.WriteLine($"Hello, {lname}!");
+                        //var email = reader.GetString(4);
+                        //Debug.WriteLine($"Hello, {email}!");
+                        //var phone = reader.GetString(5);
+                        //Debug.WriteLine($"Hello, {phone}!");
+                        //var hired = reader.GetString(6);
+                        //Debug.WriteLine($"Hello, {hired}!");
+                        //var location = reader.GetString(7);
+                        //Debug.WriteLine($"Hello, {location}!");
+                        //var jobtitle = reader.GetString(8);
+                        //Debug.WriteLine($"Hello, {jobtitle}!");
+                    }
+                    //Debug.WriteLine($"Hello11111!");
+                }
+                //Debug.WriteLine($"Hello222222!");
+            }
+
+        }
+
+        private void BtnLogin(object sender, RoutedEventArgs e)
+        {
+            /// Fix time format for AI Box.
+            Debug.WriteLine("___: " );
+            using (var connection = new SqliteConnection("Data Source=hello.db"))
+            {
+                connection.Open();
+
+                var command = connection.CreateCommand();
+
+                command.CommandText = @"SELECT id, upass FROM staff";
 
                 using (var reader = command.ExecuteReader())
                 {
@@ -62,33 +104,20 @@ namespace p
                         Debug.WriteLine($"Hello, {id}!");
                         var upass = reader.GetString(1);
                         Debug.WriteLine($"Hello, {upass}!");
-                        var fname = reader.GetString(2);
-                        Debug.WriteLine($"Hello, {fname}!");
-                        var lname = reader.GetString(3);
-                        Debug.WriteLine($"Hello, {lname}!");
-                        var email = reader.GetString(4);
-                        Debug.WriteLine($"Hello, {email}!");
-                        var phone = reader.GetString(5);
-                        Debug.WriteLine($"Hello, {phone}!");
-                        var hired = reader.GetString(6);
-                        Debug.WriteLine($"Hello, {hired}!");
-                        var location = reader.GetString(7);
-                        Debug.WriteLine($"Hello, {location}!");
-                        var jobtitle = reader.GetString(8);
-                        Debug.WriteLine($"Hello, {jobtitle}!");
+
+                        if(txtUName.Text == id && txtUPass.Text == upass)
+                        {
+                            //Login success
+                            Debug.WriteLine("qqqqqqq");
+                        }
+                        else
+                        {
+                            //Login failed
+                            Debug.WriteLine("wwww");
+                        }
                     }
-                    Debug.WriteLine($"Hello11111!");
                 }
-                Debug.WriteLine($"Hello222222!");
             }
-            Debug.WriteLine($"Hello33333!");
-
-        }
-
-        private void BtnLogin(object sender, RoutedEventArgs e)
-        {
-            /// Fix time format for AI Box.
-            Debug.WriteLine("___: " );
 
         }
 
