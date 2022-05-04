@@ -23,7 +23,7 @@
                    Foreground="LightSteelBlue" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2"/>
         <PasswordBox Name="txtUPass" Height="40" Width="150" Grid.Row="2"/>
 
-        <Button Content="Login"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3"/>
+        <Button Content="Login" Click="BtnLogin"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3"/>
 
     </Grid>
 </Page>
