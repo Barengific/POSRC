@@ -14,6 +14,13 @@
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
+        
+        <ListView Grid.Column="0">
+            <RichEditBox Height="100" Width="100"/>
+        </ListView>
+
+        <TextBlock MinWidth="50" Text="seccond" 
+                   Foreground="LightSteelBlue" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1"/>
 
     </Grid>
 </Page>
