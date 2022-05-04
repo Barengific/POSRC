@@ -15,13 +15,14 @@ using System.Windows.Shapes;
 using System.Data;
 using Microsoft.Data.Sqlite;
 using System.Diagnostics;
+using System.Windows.Navigation;
 
 namespace p
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LoginWin : Window
     {
         string addProductTbl = "CREATE TABLE items(	id INT NOT NULL PRIMARY KEY,	sku int,	name VARCHAR(20) NOT NULL,	description VARCHAR(50),	qty int NOT NULL,	price float NOT NULL,	category VARCHAR(20) NOT NULL);";
 
@@ -33,7 +34,7 @@ namespace p
 
         string addBobUser = "INSERT INTO staff(upass, first_name, last_name, email, phone, hired_date, location, job_title) VALUES ('bobpass1234','bob', 'jim', 'bobJ12@gmail.com', 075326920, date('now','start of month'), 'nyc', 'managers');";
 
-        public MainWindow()
+        public LoginWin()
         {
             InitializeComponent();
 
@@ -86,7 +87,7 @@ namespace p
 
         private void BtnLogin(object sender, RoutedEventArgs e)
         {
-            /// Fix time format for AI Box.
+
             Debug.WriteLine("___: " );
             using (var connection = new SqliteConnection("Data Source=hello.db"))
             {
@@ -94,7 +95,7 @@ namespace p
 
                 var command = connection.CreateCommand();
 
-                command.CommandText = @"SELECT id, upass FROM staff";
+                command.CommandText = @"SELECT id, upass, job_title FROM staff";
 
                 using (var reader = command.ExecuteReader())
                 {
@@ -104,11 +105,23 @@ namespace p
                         Debug.WriteLine($"Hello, {id}!");
                         var upass = reader.GetString(1);
                         Debug.WriteLine($"Hello, {upass}!");
+                        var jobtitle = reader.GetString(2);
+                        Debug.WriteLine($"Hello, {jobtitle}!");
 
-                        if(txtUName.Text == id && txtUPass.Text == upass)
+                        if (txtUName.Text == id && txtUPass.Text == upass)
                         {
                             //Login success
-                            Debug.WriteLine("qqqqqqq");
+                            if(jobtitle == "cashier")
+                            {
+                                MainWinStaff w = new MainWinStaff();
+                                w.Show();
+                            }
+                            else if (jobtitle == "manager")
+                            {
+                                //MainWinStaff w = new MainWinStaff();
+                                //w.Show();
+                            }
+
                         }
                         else
                         {

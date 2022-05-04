@@ -10,6 +10,13 @@
   <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="6.0.4" />
+    <PackageReference Include="ModernWpfUI" Version="0.9.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Windows.Shell">
+      <HintPath>..\..\..\..\Downloads\mui-master\mui-master\1.0\FirstFloor.ModernUI\Binaries\Microsoft.Windows.Shell.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
