@@ -24,6 +24,17 @@ namespace ap
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        string addProductTbl = "CREATE TABLE items(	id INT NOT NULL PRIMARY KEY,	sku int,	name VARCHAR(20) NOT NULL,	description VARCHAR(50),	qty int NOT NULL,	price float NOT NULL,	category VARCHAR(20) NOT NULL);";
+
+        string addStaffTbl = "CREATE TABLE staff(  id INTEGER PRIMARY KEY AUTOINCREMENT,  upass CHAR(64) NOT NULL,  first_name CHAR(20) NOT NULL,  last_name CHAR(20),  email CHAR(50),  phone int NOT NULL,  hired_date DateTime NOT NULL,  location CHAR(20),  job_title CHAR(20));";
+
+        string addOrdersTbl = "CREATE TABLE orders(	id INT NOT NULL PRIMARY KEY,	datetime timestamp NOT NULL,	total_price float NOT NULL,	qty int NOT NULL,	staff_id int NOT NULL);";
+
+        string addSalesTbl = "CREATE TABLE sales(	orders_id INT NOT NULL FOREIGN KEY,	product_id INT NOT NULL FOREIGN KEY,	qty int NOT NULL,	sub_total int NOT NULL,);";
+
+        string addBobUser = "INSERT INTO staff(upass, first_name, last_name, email, phone, hired_date, location, job_title) VALUES ('bobpass1234','bob', 'jim', 'bobJ12@gmail.com', 075326920, date('now','start of month'), 'nyc', 'managers');";
+
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -32,49 +43,51 @@ namespace ap
         private void BtnLogin(object sender, RoutedEventArgs e)
         {
 
+            this.Frame.Navigate(typeof(DashboardStaff));
+
             Debug.WriteLine("___: ");
-            using (var connection = new SqliteConnection("Data Source=hello.db"))
-            {
-                connection.Open();
+            //using (var connection = new SqliteConnection("Data Source=hello.db"))
+            //{
+            //    connection.Open();
 
-                var command = connection.CreateCommand();
+            //    var command = connection.CreateCommand();
 
-                command.CommandText = @"SELECT id, upass, job_title FROM staff";
+            //    command.CommandText = @"SELECT id, upass, job_title FROM staff";
 
-                using (var reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        var id = reader.GetString(0);
-                        Debug.WriteLine($"Hello, {id}!");
-                        var upass = reader.GetString(1);
-                        Debug.WriteLine($"Hello, {upass}!");
-                        var jobtitle = reader.GetString(2);
-                        Debug.WriteLine($"Hello, {jobtitle}!");
+            //    using (var reader = command.ExecuteReader())
+            //    {
+            //        while (reader.Read())
+            //        {
+            //            var id = reader.GetString(0);
+            //            Debug.WriteLine($"Hello, {id}!");
+            //            var upass = reader.GetString(1);
+            //            Debug.WriteLine($"Hello, {upass}!");
+            //            var jobtitle = reader.GetString(2);
+            //            Debug.WriteLine($"Hello, {jobtitle}!");
 
-                        if (txtUName.Text == id && txtUPass.Password.ToString() == upass)
-                        {
-                            //Login success
-                            if (jobtitle == "cashier")
-                            {
-                                //MainWinStaff w = new MainWinStaff();
-                                //w.Show();
-                            }
-                            else if (jobtitle == "manager")
-                            {
-                                //MainWinStaff w = new MainWinStaff();
-                                //w.Show();
-                            }
+            //            if (txtUName.Text == id && txtUPass.Password.ToString() == upass)
+            //            {
+            //                //Login success
+            //                if (jobtitle == "cashier")
+            //                {
+            //                    //MainWinStaff w = new MainWinStaff();
+            //                    //w.Show();
+            //                }
+            //                else if (jobtitle == "manager")
+            //                {
+            //                    //MainWinStaff w = new MainWinStaff();
+            //                    //w.Show();
+            //                }
 
-                        }
-                        else
-                        {
-                            //Login failed
-                            Debug.WriteLine("wwww");
-                        }
-                    }
-                }
-            }
+            //            }
+            //            else
+            //            {
+            //                //Login failed
+            //                Debug.WriteLine("wwww");
+            //            }
+            //        }
+            //    }
+            //}
 
         }
     }
