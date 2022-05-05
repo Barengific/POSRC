@@ -29,15 +29,8 @@ namespace ap
         {
             this.InitializeComponent();
 
-            //List<Products> products = new List<Products>();
-            //products.Add(new Products { Image = "Assets/sponge.jpg", Title = "Sponge", Subtitle = "sponges", Description = "a soft, light, porous absorbent substance" });
-            //products.Add(new Products { Image = "Assets/glass.jpg", Title = "Glass", Subtitle = "list of glass", Description = "a non-crystalline, often transparent amorphous solid" });
-
-            //LvItems.ItemsSource = products;
-
             List<Product> products = new List<Product>();
 
-            // Add some items to collection
             products.Add(
                 new Product(
                             "Glass",
@@ -48,20 +41,16 @@ namespace ap
                     )
                 );
 
-            // Specify the list view item source
             ListView1.ItemsSource = products;
 
         }
 
         private void ListView1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Get the instance of ListView
             ListView listView = sender as ListView;
 
-            // Get the ListView selected item as a Book
             Product selectedBook = listView.SelectedItem as Product;
 
-            // Initialize a new message dialog
             MessageDialog dialog = new MessageDialog(
                 "Selected : \n"
                 + selectedBook.ItemName + "\n"
@@ -69,7 +58,6 @@ namespace ap
                 + selectedBook.ItemQty + "\n"
                 + selectedBook.ItemTotal);
 
-            // Finally, display the selected item details on dialog
             dialog.ShowAsync();
         }
     }
