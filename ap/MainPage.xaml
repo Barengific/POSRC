@@ -15,13 +15,10 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <TextBlock MinWidth="50" Text="Username" 
-                   Foreground="LightSteelBlue" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1"/>
-        <TextBox Name="txtUName" Height="40" Width="150" Grid.Row="1"/>
 
-        <TextBlock MinWidth="50" Text="Password" 
-                   Foreground="LightSteelBlue" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2"/>
-        <PasswordBox Name="txtUPass" Height="40" Width="150" Grid.Row="2"/>
+        <TextBox Name="txtUName" PlaceholderText="Username" Height="40" Width="150" Grid.Row="1"/>
+
+        <PasswordBox Name="txtUPass" PlaceholderText="Password" Height="40" Width="150" Grid.Row="2"/>
 
         <Button Content="Login" Click="BtnLogin"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3"/>
 
