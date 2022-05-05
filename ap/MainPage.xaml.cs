@@ -14,6 +14,9 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.Data.Sqlite;
+using Windows.Storage;
+using System.Collections.Generic;
+using System.Reflection;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -38,6 +41,7 @@ namespace ap
         public MainPage()
         {
             this.InitializeComponent();
+            AddData();
         }
 
         private void BtnLogin(object sender, RoutedEventArgs e)
@@ -88,6 +92,46 @@ namespace ap
             //        }
             //    }
             //}
+
+        }
+
+        public async static void InitializeDatabase()
+        {
+            _ = await ApplicationData.Current.LocalFolder.CreateFileAsync("sqliteSample.db", CreationCollisionOption.OpenIfExists);
+            string dbpath = Path.Combine(ApplicationData.Current.LocalFolder.Path, "sqliteSample.db");
+
+            using (SqliteConnection db =
+               new SqliteConnection($"Data Source={dbpath}"))
+            {
+                db.Open();
+
+                String tableCommand = @"CREATE TABLE  IF NOT EXISTS staff(  id INTEGER PRIMARY KEY AUTOINCREMENT,  upass CHAR(64) NOT NULL,  first_name CHAR(20) NOT NULL,  last_name CHAR(20),  email CHAR(50),  phone int NOT NULL,  hired_date DateTime NOT NULL,  location CHAR(20),  job_title CHAR(20));";
+
+                SqliteCommand createTable = new SqliteCommand(tableCommand, db);
+
+                createTable.ExecuteReader();
+            }
+        }
+
+        public static void AddData()
+        {
+            string addBobUser = "INSERT INTO staff(upass, first_name, last_name, email, phone, hired_date, location, job_title) VALUES ('bobpass1234','bob', 'jim', 'bobJ12@gmail.com', 075326920, date('now','start of month'), 'nyc', 'managers');";
+            string dbpath = Path.Combine(ApplicationData.Current.LocalFolder.Path, "sqliteSample.db");
+            using (SqliteConnection db =
+              new SqliteConnection($"Filename={dbpath}"))
+            {
+                db.Open();
+
+                SqliteCommand insertCommand = new SqliteCommand();
+                insertCommand.Connection = db;
+
+                // Use parameterized query to prevent SQL injection attacks
+                insertCommand.CommandText = @addBobUser;
+
+                insertCommand.ExecuteReader();
+
+                db.Close();
+            }
 
         }
     }
