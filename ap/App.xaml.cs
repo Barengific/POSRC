@@ -30,6 +30,9 @@ namespace ap
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            MainPage.InitializeDatabase();
+            MainPage.AddData();
         }
 
         /// <summary>
