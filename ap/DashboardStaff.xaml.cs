@@ -24,12 +24,12 @@ namespace ap
     /// </summary>
     public sealed partial class DashboardStaff : Page
     {
+        public List<Product> products = new List<Product>();
+        public List<ExtraProduct> extraProducts = new List<ExtraProduct>();
 
         public DashboardStaff()
         {
             this.InitializeComponent();
-
-            List<Product> products = new List<Product>();
 
             products.Add(
                 new Product(
@@ -41,11 +41,21 @@ namespace ap
                     )
                 );
 
-            ListView1.ItemsSource = products;
+            LvBasket.ItemsSource = products;
+
+            extraProducts.Add(
+                new ExtraProduct(
+                    "Sponge",
+                    "20.00",
+                    "4 Pack",
+                    "Assets/sponge.jpg"
+                )
+            );
+            LvExtra.ItemsSource = extraProducts;
 
         }
 
-        private void ListView1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void LvProduct_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ListView listView = sender as ListView;
 
@@ -57,6 +67,21 @@ namespace ap
                 + selectedBook.ItemPrice + "\n"
                 + selectedBook.ItemQty + "\n"
                 + selectedBook.ItemTotal);
+
+            dialog.ShowAsync();
+        }
+
+        private void LvExtra_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListView listView = sender as ListView;
+
+            ExtraProduct selectedBook = listView.SelectedItem as ExtraProduct;
+
+            MessageDialog dialog = new MessageDialog(
+                "Selected : \n"
+                + selectedBook.ItemName + "\n"
+                + selectedBook.ItemPrice + "\n"
+                + selectedBook.ItemUnit);
 
             dialog.ShowAsync();
         }
@@ -76,6 +101,21 @@ namespace ap
             this.ItemPrice = Price;
             this.ItemQty = Qty;
             this.ItemTotal = Total;
+            this.ItemImage = Image;
+        }
+    }
+    public class ExtraProduct
+    {
+        public string ItemName { get; set; }
+        public string ItemPrice { get; set; }
+        public string ItemUnit { get; set; }
+        public string ItemImage { get; set; }
+
+        public ExtraProduct(string Name, string Price, string Unit, string Image)
+        {
+            this.ItemName = Name;
+            this.ItemPrice = Price;
+            this.ItemUnit = Unit;
             this.ItemImage = Image;
         }
     }
