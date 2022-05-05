@@ -16,7 +16,7 @@
 
         <Grid Grid.Row="0">
             <Button Content="Home" FontFamily="Verdana" FontWeight="Black"  FontSize="50" />
-            <Button Content="USER SETTINGs" FontWeight="Black"  FontSize="50" Margin="224,0,0,0" />
+            <Button Content="User Setttings" FontWeight="Black"  FontSize="50" Margin="224,0,0,0" />
             <Button Content="USER SETTINGs" FontWeight="Black"  FontSize="50" Margin="668,0,0,0" />
         </Grid>
 
@@ -25,7 +25,7 @@
                 <ColumnDefinition Width="400"/>
                 <ColumnDefinition Width="400"/>
             </Grid.ColumnDefinitions>
-            <ListView x:Name="ListView1" SelectionChanged="ListView1_SelectionChanged" Grid.Column="0">
+            <ListView x:Name="LvBasket" SelectionChanged="LvProduct_SelectionChanged" Grid.Column="0">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -60,6 +60,44 @@
                                 />
                                 <TextBlock
                                 Text="{Binding ItemTotal}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <ListView x:Name="LvExtra" SelectionChanged="LvExtra_SelectionChanged" Grid.Column="1">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel 
+                        Orientation="Horizontal" 
+                        Margin="0"
+                        BorderBrush="LightSkyBlue"
+                        BorderThickness="0,0,0,2"
+                        Padding="5,5,5,5">
+                            <Border Padding="5,5,5,5">
+                                <Image Source="{Binding ItemImage}" Width="100" Height="100"/>
+                            </Border>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock
+                                Text="{Binding ItemName}"
+                                FontWeight="Black"
+                                FontFamily="Calibri"
+                                FontSize="20"
+                                />
+                                <TextBlock
+                                Text="{Binding ItemPrice}"
+                                FontStyle="Italic"
+                                />
+                                <TextBlock
+                                Text="{Binding ItemUnit}"
+                                Foreground="GreenYellow"
+                                />
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>
