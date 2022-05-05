@@ -9,18 +9,50 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"/>
-            <ColumnDefinition Width="300"/>
-            <ColumnDefinition Width="300"/>
-        </Grid.ColumnDefinitions>
-        
-        <ListView Grid.Column="0">
-            <RichEditBox Height="100" Width="100"/>
+
+        <ListView 
+            x:Name="ListView1" 
+            SelectionChanged="ListView1_SelectionChanged"
+            >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel 
+                        Orientation="Horizontal" 
+                        Margin="0"
+                        BorderBrush="LightSkyBlue"
+                        BorderThickness="0,0,0,2"
+                        Padding="5,5,5,5"
+                        >
+                        <Image Source="{Binding ItemImage}"/>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock
+                                Text="{Binding ItemName}"
+                                FontWeight="Black"
+                                Margin="0,30,0,0"
+                                FontFamily="Calibri"
+                                FontSize="17"
+                                />
+                            <TextBlock
+                                Text="{Binding ItemPrice}"
+                                FontStyle="Italic"
+                                />
+                            <TextBlock
+                                Text="{Binding ItemQty}"
+                                Foreground="Crimson"
+                                />
+                            <TextBlock
+                                Text="{Binding ItemTotal}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
 
-        <TextBlock MinWidth="50" Text="seccond" 
-                   Foreground="LightSteelBlue" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1"/>
 
     </Grid>
 </Page>
